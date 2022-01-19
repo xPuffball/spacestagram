@@ -1,10 +1,20 @@
 // import dependencies
 import React, { useState } from 'react'
 
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Avatar } from '@material-ui/core'
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Avatar, IconButton, Popover } from '@material-ui/core'
+import FavoriteIcon  from '@material-ui/icons/Favorite';
+import FavoriteBorder  from '@material-ui/icons/FavoriteBorder';
 
 import ReadMore from './ReadMore'
 const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
+
+    const [liked, setLiked] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        setTimeout(setAnchorEl(null), 1000);
+      };
 
     const dateToString = (date) => {
         const dateObj = new Date(date)
@@ -23,7 +33,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
 
 
     return (
-        <Card style={{ maxWidth: 345 }}>   
+        <Card style={{ maxWidth: 400 }}>   
             <CardHeader
                 avatar={
                     <Avatar src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" aria-label="recipe" alt='NASA'/>
@@ -41,13 +51,16 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                     {`Copyright: ${copyright}`} 
                 </Typography>
             }
-            <CardContent>
+            <CardContent style={{paddingTop: '0px', paddingBottom: '0px'}}>
                 <Typography variant="body2" color="textSecondary" component="p">
                     <ReadMore content={explanation}></ReadMore>
                 </Typography>
             </CardContent>
             <CardActions>
-                <Typography variant="body2" color="textSecondary" component="p">Test Actions!</Typography>
+                <IconButton onClick={() => setLiked(!liked)}>
+                    {liked ? <FavoriteIcon color="primary"/> 
+                    : <FavoriteBorder color="primary"/>}
+                </IconButton>
             </CardActions>
         </Card>
     )
