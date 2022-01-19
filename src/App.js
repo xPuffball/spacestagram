@@ -1,9 +1,9 @@
-import './App.css';
+import Feed from './components/Feed.js'
 
 function App() {
   return (
     <div className="App">
-      {'hi'}
+      <Feed></Feed>
     </div>
   );
 }
