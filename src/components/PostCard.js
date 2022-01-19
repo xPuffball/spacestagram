@@ -1,15 +1,35 @@
 // import dependencies
 import React, { useState } from 'react'
 
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Avatar, IconButton, Popover } from '@material-ui/core'
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Avatar, IconButton, Popover, Modal, Box } from '@material-ui/core'
 import FavoriteIcon  from '@material-ui/icons/Favorite';
 import FavoriteBorder  from '@material-ui/icons/FavoriteBorder';
 
 import ReadMore from './ReadMore'
 const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
 
+    // states for like button
     const [liked, setLiked] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
+
+    // states for image modal
+    const [imgOpen, setImgOpen] = useState(false)
+    
+    const handleImgClose = () => {
+        setImgOpen(false)
+    }
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     const handleClick = (event) => {
         setLiked(!liked)
@@ -21,6 +41,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
 
     //Popover Properties
     const open = Boolean(anchorEl);
@@ -52,6 +73,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                 subheader={dateToString(date)}
             />
             <CardMedia
+                onClick={() => setImgOpen(true)}
                 component="img"
                 height="200"
                 image={url}
@@ -93,6 +115,13 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                 </Typography>
                 </Popover>
             </CardActions>
+            <Modal
+                style={style}
+                open={imgOpen}
+                onClose={handleImgClose}
+                >
+                <img src={hdurl} alt="" width='400px'/>
+            </Modal>
         </Card>
     )
 }
