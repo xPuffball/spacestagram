@@ -1,7 +1,7 @@
 // import dependencies
 import React, { useState } from 'react'
 
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Avatar, IconButton, Popover, Modal, Box } from '@material-ui/core'
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Avatar, IconButton, Popover, Dialog, Box } from '@material-ui/core'
 import FavoriteIcon  from '@material-ui/icons/Favorite';
 import FavoriteBorder  from '@material-ui/icons/FavoriteBorder';
 
@@ -14,6 +14,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
 
     // states for image modal
     const [imgOpen, setImgOpen] = useState(false)
+    const [imgHover, setImgHover] = useState(false)
     
     const handleImgClose = () => {
         setImgOpen(false)
@@ -73,7 +74,10 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                 subheader={dateToString(date)}
             />
             <CardMedia
+                style={imgHover ? {cursor: 'pointer', filter: 'brightness(50%)'} : {}}
                 onClick={() => setImgOpen(true)}
+                onMouseEnter={() => setImgHover(true)}
+                onMouseLeave={() => setImgHover(false)}
                 component="img"
                 height="200"
                 image={url}
@@ -115,13 +119,12 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                 </Typography>
                 </Popover>
             </CardActions>
-            <Modal
-                style={style}
+            <Dialog
                 open={imgOpen}
                 onClose={handleImgClose}
                 >
                 <img src={hdurl} alt="" width='400px'/>
-            </Modal>
+            </Dialog>
         </Card>
     )
 }
