@@ -12,9 +12,19 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        setTimeout(setAnchorEl(null), 1000);
-      };
+        setLiked(!liked)
+        if(!liked) {
+            setAnchorEl(event.currentTarget);
+        }
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    //Popover Properties
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const dateToString = (date) => {
         const dateObj = new Date(date)
@@ -57,10 +67,31 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <IconButton onClick={() => setLiked(!liked)}>
+                <IconButton onClick={handleClick}>
                     {liked ? <FavoriteIcon color="primary"/> 
                     : <FavoriteBorder color="primary"/>}
                 </IconButton>
+                <Popover
+                    id={id}
+                    open={open}
+                    onClose={handleClose}
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}                
+                     >
+                <Typography 
+                    style={{padding: '0.1rem 0.25rem', backgroundColor: '#0b3d91', color: 'white', display: 'flex', gap: '0.25rem'}}
+                >
+                    <FavoriteIcon style={{maxWidth: '18px'}} color="white"/>
+                    Liked
+                </Typography>
+                </Popover>
             </CardActions>
         </Card>
     )
