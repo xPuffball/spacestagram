@@ -1,6 +1,6 @@
 
 ## Welcome to Spacestagram!
-![screenshot_landing_page](screenshots/final.jpg)
+![screenshot_landing_page](https://github.com/xPuffball/spacestagram/blob/main/screenshots/final.JPG)
 Spacestagram is a simple one-page application that fetches images from NASA's APOD API and
 renders them on a instagram-like page. 
 
