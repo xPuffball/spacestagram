@@ -15,3 +15,11 @@ Spacestagram was created:
 - To like an image, click the heart at the bottom of each image card! (a popover will show up too :))
 - To view a larger, HD version of the image, simply click on the image!
 - There's a spinner with a random message when loading (woah!)
+
+## Spacestagram - Download
+Live demo available at: https://jaemin-spacestagram.netlify.app
+
+else:
+clone the repo and then:
+`npm install`
+`npm start`
