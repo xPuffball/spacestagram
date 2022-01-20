@@ -1,5 +1,6 @@
 
 ## Welcome to Spacestagram!
+![screenshot_landing_page](./screenshots/final.jpg)
 Spacestagram is a simple one-page application that fetches images from NASA's APOD API and
 renders them on a instagram-like page. 
 
