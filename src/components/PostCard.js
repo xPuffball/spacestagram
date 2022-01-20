@@ -16,10 +16,12 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
     const [imgOpen, setImgOpen] = useState(false)
     const [imgHover, setImgHover] = useState(false)
     
+    // handles hd image closure
     const handleImgClose = () => {
         setImgOpen(false)
     }
 
+    // handles like button click function
     const handleClick = (event) => {
         setLiked(!liked)
         if(!liked) {
@@ -27,6 +29,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
         }
     };
 
+    // handles like button popover closure
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -36,6 +39,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
+    // converts date to a more readable format
     const dateToString = (date) => {
         const dateObj = new Date(date)
         const year = dateObj.getFullYear()
@@ -44,6 +48,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
         return `${month} ${day}, ${year}`
     }
 
+    // converts month number to month name
     const intToMonth = (month) => {
         let months = [ "January", "February", "March", "April", "May", "June", "July", 
         "August", "September", "October", "November", "December" ];
@@ -75,7 +80,7 @@ const PostCard = ({ title, date, url, hdurl, explanation, copyright }) => {
                     {`Copyright: ${copyright}`} 
                 </Typography>
             }
-            <CardContent style={{paddingTop: '0px', paddingBottom: '0px'}}>
+            <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     <ReadMore content={explanation}></ReadMore>
                 </Typography>
