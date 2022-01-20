@@ -8,6 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+
+//  material ui icons
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 // import componenets
 import PostCard from './PostCard'
@@ -27,7 +31,7 @@ const Feed = () => {
         setLoading(true)
         axios.get('https://api.nasa.gov/planetary/apod?api_key=' + API_KEY, {
             params: {
-                count: 10
+                count: 5
             }
         })
         .then(res => {
@@ -44,7 +48,7 @@ const Feed = () => {
     }, [])
 
     return (
-        <Box style={{display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center'}}>
+        <Box style={{display: 'flex', flexDirection: 'column', gap: '2.5rem', alignItems: 'center', padding: '2.5rem'}}>
             <Box style={{margin: '4rem'}}>
                 <CardHeader 
                     avatar={
@@ -53,7 +57,7 @@ const Feed = () => {
                         </Box>
                     }
                     title={
-                        <Typography variant="h5" fontWeight={'bold'}>
+                        <Typography variant="h5" style={{fontWeight: 'bold'}}>
                             Welcome to Spacestagram!
                         </Typography>
                     }
@@ -64,6 +68,14 @@ const Feed = () => {
                     }
                 />
             </Box>
+            {!loading ?
+                <Box> 
+                    <Button variant="outlined" onClick={() => getFeed()}>
+                        <RefreshIcon></RefreshIcon>
+                        New Images
+                    </Button>              
+                </Box>
+            : null}
             {!loading ? feed.map((post, index) => {
                 return (
                     <PostCard
